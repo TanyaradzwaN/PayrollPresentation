@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,8 +68,8 @@
                 min-height: 100vh !important;
                 opacity: 1 !important;
                 transform: none !important;
-                background: #0f172a !important; /* Keep original dark theme look on export if possible */
-                color: #f8fafc !important;
+                background: #ffffff !important;
+                color: #0f172a !important;
                 padding: 40px !important;
             }
             .print-container {
@@ -80,28 +80,45 @@
         }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col overflow-x-hidden selection:bg-brand-500 selection:text-slate-900">
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans min-h-screen flex flex-col overflow-x-hidden selection:bg-brand-500 selection:text-slate-900 transition-colors duration-300">
 
     <!-- Top Navigation Bar (Always Visible) -->
-    <header class="no-print bg-slate-900/80 backdrop-blur-md border-b border-slate-800 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+    <header class="no-print bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 py-4 flex items-center justify-between sticky top-0 z-50 transition-colors duration-300">
         <div class="flex items-center gap-3">
-            
+            <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-brand-500 to-accent-500 flex items-center justify-center shadow-lg shadow-brand-500/10">
+                <svg class="h-6 w-6 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
             <div>
                 <span class="font-extrabold text-xl tracking-tight bg-gradient-to-r from-brand-500 to-accent-500 bg-clip-text text-transparent">CorePay</span>
-                <span class="text-xs font-semibold text-slate-400 ml-2 uppercase tracking-widest hidden sm:inline-block">AI Payroll Ecosystem</span>
+                <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 ml-2 uppercase tracking-widest hidden sm:inline-block">AI Payroll Ecosystem</span>
             </div>
         </div>
 
         <!-- Controls -->
-       
+        <div class="flex items-center gap-2 sm:gap-4">
+            <!-- Theme Toggle Switch -->
+            <button onclick="toggleTheme()" class="p-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all border border-slate-200 dark:border-slate-700" title="Toggle Theme">
+                <!-- Sun Icon -->
+                <svg id="theme-sun" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.364 17.636l-.707.707M17.636 17.636l.707.707M6.364 4.364l.707.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <!-- Moon Icon -->
+                <svg id="theme-moon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+          
+        </div>
     </header>
 
     <!-- Main Workspace -->
     <main class="flex-grow flex flex-col md:flex-row relative print-container">
         
         <!-- Sidebar Navigation (Quick Slide Select) -->
-        <aside class="no-print w-full md:w-64 bg-slate-900 border-r border-slate-800 p-4 flex flex-col gap-2 overflow-y-auto max-h-[25vh] md:max-h-[calc(100vh-73px)] scrollbar-thin">
-            <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 px-3 py-1">Presentation Slides</span>
+        <aside class="no-print w-full md:w-64 bg-slate-100 dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 p-4 flex flex-col gap-2 overflow-y-auto max-h-[25vh] md:max-h-[calc(100vh-73px)] scrollbar-thin transition-colors duration-300">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 px-3 py-1">Presentation Slides</span>
             <nav id="slideMenu" class="flex flex-row md:flex-col gap-1 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0"></nav>
         </aside>
 
@@ -114,52 +131,52 @@
             </div>
 
             <!-- Slide Navigation Footer -->
-            <footer class="no-print mt-4 flex flex-col sm:flex-row gap-4 items-center justify-between bg-slate-900/40 p-4 rounded-xl border border-slate-800/60">
+            <footer class="no-print mt-4 flex flex-col sm:flex-row gap-4 items-center justify-between bg-slate-200/40 dark:bg-slate-900/40 p-4 rounded-xl border border-slate-200 dark:border-slate-800/60 transition-colors duration-300">
                 <div class="flex items-center gap-3">
-                    <button onclick="prevSlide()" class="p-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all border border-slate-700 disabled:opacity-40 disabled:cursor-not-allowed" id="prevBtn">
+                    <button onclick="prevSlide()" class="p-3 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition-all border border-slate-200 dark:border-slate-700 disabled:opacity-40 disabled:cursor-not-allowed" id="prevBtn">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" /></svg>
                     </button>
-                    <span id="slideCounter" class="text-slate-400 font-mono text-sm px-2">1 / 10</span>
-                    <button onclick="nextSlide()" class="p-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition-all border border-slate-700 disabled:opacity-40 disabled:cursor-not-allowed" id="nextBtn">
+                    <span id="slideCounter" class="text-slate-600 dark:text-slate-400 font-mono text-sm px-2">1 / 10</span>
+                    <button onclick="nextSlide()" class="p-3 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition-all border border-slate-200 dark:border-slate-700 disabled:opacity-40 disabled:cursor-not-allowed" id="nextBtn">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" /></svg>
                     </button>
                 </div>
 
                 <div class="text-xs text-slate-500 flex items-center gap-2">
-                    <span class="px-2 py-1 rounded bg-slate-800 border border-slate-700 font-mono">← / →</span>
+                    <span class="px-2 py-1 rounded bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-slate-700 dark:text-slate-300">← / →</span>
                     <span>Use keyboard keys or swipe to navigate</span>
                 </div>
             </footer>
         </section>
 
         <!-- Speaker Notes Drawer (Right Pane) -->
-        <aside id="speakerNotesDrawer" class="no-print w-full md:w-96 bg-slate-900 border-t md:border-t-0 md:border-l border-slate-800 p-6 flex flex-col transition-all duration-300 transform translate-x-0 hidden">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+        <aside id="speakerNotesDrawer" class="no-print w-full md:w-96 bg-slate-100 dark:bg-slate-900 border-t md:border-t-0 md:border-l border-slate-200 dark:border-slate-800 p-6 flex flex-col transition-all duration-300 transform translate-x-0 hidden">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-4">
                 <div class="flex items-center gap-2">
                     <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
-                    <span class="font-bold text-slate-200 uppercase tracking-wider text-sm">Speaker Notes</span>
+                    <span class="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider text-sm">Speaker Notes</span>
                 </div>
-                <button onclick="toggleSpeakerNotes()" class="text-slate-400 hover:text-slate-200">
+                <button onclick="toggleSpeakerNotes()" class="text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
             </div>
-            <div id="speakerNotesContent" class="text-slate-300 leading-relaxed text-sm overflow-y-auto max-h-[40vh] md:max-h-[calc(100vh-200px)] space-y-3 prose prose-invert">
+            <div id="speakerNotesContent" class="text-slate-700 dark:text-slate-300 leading-relaxed text-sm overflow-y-auto max-h-[40vh] md:max-h-[calc(100vh-200px)] space-y-3 prose dark:prose-invert">
                 <!-- Injected dynamically -->
             </div>
         </aside>
     </main>
 
     <!-- Custom Toast System for copy confirmations / notifications -->
-    <div id="toast" class="no-print fixed bottom-6 right-6 px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 shadow-xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+    <div id="toast" class="no-print fixed bottom-6 right-6 px-4 py-3 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
         <svg class="w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        <span id="toastMessage" class="text-sm font-medium text-slate-200"></span>
+        <span id="toastMessage" class="text-sm font-medium text-slate-800 dark:text-slate-200"></span>
     </div>
 
     <!-- Printable container for full exports -->
     <div id="printContainer" class="hidden"></div>
 
     <script>
-        // Presentation Data
+        // Presentation Data containing dynamically styled Light & Dark Mode templates
         const presentationData = [
             {
                 id: 1,
@@ -167,24 +184,24 @@
                 menuTitle: "Title Slide",
                 html: `
                     <div class="text-center max-w-4xl px-4 py-8 flex flex-col items-center justify-center h-full">
-                        <span class="px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-500 text-xs font-semibold tracking-widest uppercase mb-6 animate-pulse">Presenting Platform Solution</span>
-                        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 bg-gradient-to-r from-slate-100 via-slate-100 to-slate-400 bg-clip-text text-transparent">
+                        <span class="px-4 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-500 text-xs font-bold tracking-widest uppercase mb-6 animate-pulse">Presenting Platform Solution</span>
+                        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-500 dark:from-slate-100 dark:via-slate-100 dark:to-slate-400 bg-clip-text text-transparent">
                             AI-Enabled Payroll & HR Services
                         </h1>
-                        <p class="text-slate-400 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed">
+                        <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl max-w-2xl mb-8 leading-relaxed">
                             Transforming payroll from a back-office cost center into a strategic, value-generating asset for the enterprise.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-4 items-center justify-center w-full max-w-md">
-                            <div class="flex items-center gap-3 px-4 py-2 bg-slate-900/60 rounded-xl border border-slate-800 text-left w-full sm:w-auto">
+                            <div class="flex items-center gap-3 px-4 py-2 bg-slate-100 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-800 text-left w-full sm:w-auto">
                                 <span class="h-8 w-8 rounded-lg bg-brand-500/20 text-brand-500 flex items-center justify-center">🎯</span>
-                                <div><p class="text-xs text-slate-500">Focus</p><p class="text-sm font-bold text-slate-200">Client Centric</p></div>
+                                <div><p class="text-xs text-slate-500">Focus</p><p class="text-sm font-bold text-slate-800 dark:text-slate-200">Client Centric</p></div>
                             </div>
-                            <div class="flex items-center gap-3 px-4 py-2 bg-slate-900/60 rounded-xl border border-slate-800 text-left w-full sm:w-auto">
+                            <div class="flex items-center gap-3 px-4 py-2 bg-slate-100 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-800 text-left w-full sm:w-auto">
                                 <span class="h-8 w-8 rounded-lg bg-accent-500/20 text-accent-500 flex items-center justify-center">🤖</span>
-                                <div><p class="text-xs text-slate-500">Engine</p><p class="text-sm font-bold text-slate-200">AI & Automation</p></div>
+                                <div><p class="text-xs text-slate-500">Engine</p><p class="text-sm font-bold text-slate-800 dark:text-slate-200">AI & Automation</p></div>
                             </div>
                         </div>
-                        <div class="mt-12 text-slate-500 text-xs font-semibold uppercase tracking-widest">
+                        <div class="mt-12 text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-widest">
                             CorePay • Session Roadmap
                         </div>
                     </div>
@@ -208,48 +225,48 @@
                         <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
                             <div>
                                 <span class="text-brand-500 font-semibold text-xs tracking-wider uppercase">Strategic Imperative</span>
-                                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mt-1 text-slate-100">Why Modernize Payroll?</h2>
+                                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mt-1 text-slate-800 dark:text-slate-100">Why Modernize Payroll?</h2>
                             </div>
-                            <div class="px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold font-mono">
+                            <div class="px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs font-semibold font-mono">
                                 ⚠️ 33% of employers incur penalty-related errors
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
                             <!-- Challenge Box -->
-                            <div class="bg-gradient-to-br from-slate-900 to-slate-950 p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                                 <div>
-                                    <h3 class="text-lg font-bold text-slate-200 mb-4 flex items-center gap-2">
+                                    <h3 class="text-lg font-bold text-slate-800 dark:text-slate-200 mb-4 flex items-center gap-2">
                                         <span class="p-1 bg-red-500/10 rounded text-red-500 text-sm">✕</span> Traditional Processes
                                     </h3>
-                                    <ul class="space-y-3.5 text-sm text-slate-400">
+                                    <ul class="space-y-3.5 text-sm text-slate-600 dark:text-slate-400">
                                         <li class="flex items-start gap-2.5">
-                                            <span class="text-slate-600 mt-1">•</span>
+                                            <span class="text-slate-400 dark:text-slate-600 mt-1">•</span>
                                             <span>Manual inputs & scattered sheets are prone to regulatory and arithmetic issues.</span>
                                         </li>
                                         <li class="flex items-start gap-2.5">
-                                            <span class="text-slate-600 mt-1">•</span>
+                                            <span class="text-slate-400 dark:text-slate-600 mt-1">•</span>
                                             <span>Delayed cycle workflows lead to costly late validations.</span>
                                         </li>
                                         <li class="flex items-start gap-2.5">
-                                            <span class="text-slate-600 mt-1">•</span>
+                                            <span class="text-slate-400 dark:text-slate-600 mt-1">•</span>
                                             <span>Staff spend peak operational hours on mundane repetitive tasks.</span>
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="mt-6 pt-4 border-t border-slate-800/80 text-xs text-red-400/80 italic font-medium">
+                                <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800/80 text-xs text-red-600 dark:text-red-400/80 italic font-medium">
                                     "Traditional payroll limits scale and creates consistent audit vulnerabilities."
                                 </div>
                             </div>
 
                             <!-- Solution Box -->
-                            <div class="bg-gradient-to-br from-slate-900 to-slate-950 p-6 rounded-2xl border border-brand-500/20 flex flex-col justify-between relative overflow-hidden">
+                            <div class="bg-slate-100 dark:bg-slate-900 p-6 rounded-2xl border border-brand-500/30 dark:border-brand-500/20 flex flex-col justify-between relative overflow-hidden">
                                 <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-500/5 rounded-full blur-2xl"></div>
                                 <div>
                                     <h3 class="text-lg font-bold text-brand-500 mb-4 flex items-center gap-2">
                                         <span class="p-1 bg-brand-500/10 rounded text-brand-500 text-sm">✓</span> Modern CorePay System
                                     </h3>
-                                    <ul class="space-y-3.5 text-sm text-slate-300">
+                                    <ul class="space-y-3.5 text-sm text-slate-700 dark:text-slate-300">
                                         <li class="flex items-start gap-2.5">
                                             <span class="text-brand-500 mt-1">✓</span>
                                             <span>Unified database provides secure, centralized source-of-truth mapping.</span>
@@ -264,7 +281,7 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-400">
+                                <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400">
                                     <span class="text-brand-500 font-bold">EY Benchmark:</span> Automating repetitive tasks saves 20-60% in FTE payroll costs.
                                 </div>
                             </div>
@@ -290,58 +307,58 @@
                     <div class="w-full max-w-5xl px-4">
                         <div class="mb-6">
                             <span class="text-brand-500 font-semibold text-xs tracking-wider uppercase">System Architecture</span>
-                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100">AI & RPA Lifecycle Engine</h2>
+                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">AI & RPA Lifecycle Engine</h2>
                         </div>
 
                         <!-- 4 Step Pipeline Grid -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                            <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 hover:border-slate-700 transition-all">
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-all">
                                 <div class="flex justify-between items-center mb-3">
                                     <span class="text-2xl">📥</span>
-                                    <span class="text-xs font-mono font-bold text-slate-500">01</span>
+                                    <span class="text-xs font-mono font-bold text-slate-400 dark:text-slate-500">01</span>
                                 </div>
-                                <h3 class="font-bold text-slate-200 text-sm mb-2">Data Capture</h3>
-                                <p class="text-xs text-slate-400">RPA and OCR engines automatically intake timesheets, contracts, and shifts without manual re-keying.</p>
+                                <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">Data Capture</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400">RPA and OCR engines automatically intake timesheets, contracts, and shifts without manual re-keying.</p>
                             </div>
 
-                            <div class="bg-slate-900/60 p-5 rounded-xl border border-brand-500/20 hover:border-brand-500/40 transition-all relative">
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-5 rounded-xl border border-brand-500/30 dark:border-brand-500/20 hover:border-brand-500/40 transition-all relative">
                                 <div class="flex justify-between items-center mb-3">
                                     <span class="text-2xl">🔍</span>
                                     <span class="text-xs font-mono font-bold text-brand-500">02</span>
                                 </div>
-                                <h3 class="font-bold text-slate-100 text-sm mb-2">Automated Validation</h3>
-                                <p class="text-xs text-slate-300">Predictive ML anomaly validation models flag missing fields, outlier overtime, and duplicates in real-time.</p>
+                                <h3 class="font-bold text-brand-600 dark:text-slate-100 text-sm mb-2">Automated Validation</h3>
+                                <p class="text-xs text-slate-700 dark:text-slate-300">Predictive ML anomaly validation models flag missing fields, outlier overtime, and duplicates in real-time.</p>
                             </div>
 
-                            <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 hover:border-slate-700 transition-all">
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-all">
                                 <div class="flex justify-between items-center mb-3">
                                     <span class="text-2xl">⚡</span>
-                                    <span class="text-xs font-mono font-bold text-slate-500">03</span>
+                                    <span class="text-xs font-mono font-bold text-slate-400 dark:text-slate-500">03</span>
                                 </div>
-                                <h3 class="font-bold text-slate-200 text-sm mb-2">Fast Calculation</h3>
-                                <p class="text-xs text-slate-400">Highly customized, deterministic workflows run local tax and bonus equations in minutes.</p>
+                                <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">Fast Calculation</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400">Highly customized, deterministic workflows run local tax and bonus equations in minutes.</p>
                             </div>
 
-                            <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-800 hover:border-slate-700 transition-all">
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-5 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-all">
                                 <div class="flex justify-between items-center mb-3">
                                     <span class="text-2xl">🧠</span>
-                                    <span class="text-xs font-mono font-bold text-slate-500">04</span>
+                                    <span class="text-xs font-mono font-bold text-slate-400 dark:text-slate-500">04</span>
                                 </div>
-                                <h3 class="font-bold text-slate-200 text-sm mb-2">Adaptive Learning</h3>
-                                <p class="text-xs text-slate-400">Continuous feedback loops learn from human reviews to auto-tune anomaly parameters for future runs.</p>
+                                <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">Adaptive Learning</h3>
+                                <p class="text-xs text-slate-600 dark:text-slate-400">Continuous feedback loops learn from human reviews to auto-tune anomaly parameters for future runs.</p>
                             </div>
                         </div>
 
                         <!-- Real World Benefit Box -->
-                        <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-brand-950/20 p-5 rounded-xl border border-brand-500/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="bg-gradient-to-r from-slate-100 to-slate-200 dark:from-slate-900 dark:via-slate-900 dark:to-brand-950/20 p-5 rounded-xl border border-slate-200 dark:border-brand-500/10 flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div class="flex items-center gap-3">
                                 <span class="text-3xl">💡</span>
                                 <div>
-                                    <p class="text-sm font-bold text-slate-200">The Power of Anomaly Prevention</p>
-                                    <p class="text-xs text-slate-400 max-w-xl">In practice, automated verification systems flag systemic errors early—helping mid-sized enterprises avoid up to $180K in quarterly leakage.</p>
+                                    <p class="text-sm font-bold text-slate-800 dark:text-slate-200">The Power of Anomaly Prevention</p>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 max-w-xl">In practice, automated verification systems flag systemic errors early—helping mid-sized enterprises avoid up to $180K in quarterly leakage.</p>
                                 </div>
                             </div>
-                            <span class="px-3 py-1.5 rounded-lg bg-brand-500/10 text-brand-500 font-mono text-xs font-bold border border-brand-500/20 whitespace-nowrap">
+                            <span class="px-3 py-1.5 rounded-lg bg-brand-500/10 text-brand-600 dark:text-brand-500 font-mono text-xs font-bold border border-brand-500/20 whitespace-nowrap">
                                 Papaya Baseline Study
                             </span>
                         </div>
@@ -352,7 +369,7 @@
                     <ul>
                         <li>AI does not replace payroll professionals; rather, it supercharges their effectiveness.</li>
                         <li>Let's trace the lifecycle of a single pay run through our system:</li>
-                        <li>1. Data is ingested from scattered timesheets and contracts using advanced OCR (Optical Character Recognition) engines.</li>
+                        <li>1. Data is ingested from scattered timesheets and contracts using advanced OCR (Optical Recognition) engines.</li>
                         <li>2. Validation checks occur instantly using Machine Learning algorithms looking for statistical outliers (such as duplicate shift entries or extreme overtime variances).</li>
                         <li>3. Calculates the complex regulatory and custom business logic dynamically and instantly.</li>
                         <li>4. The model continuously updates in real-time, learning from exception resolutions.</li>
@@ -368,50 +385,50 @@
                     <div class="w-full max-w-5xl px-4">
                         <div class="mb-6">
                             <span class="text-accent-500 font-semibold text-xs tracking-wider uppercase">Extending Beyond Payroll</span>
-                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100">End-to-End HR Lifecycle</h2>
+                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">End-to-End HR Lifecycle</h2>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                             <!-- Lifecycle Phase 1 -->
-                            <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 flex flex-col justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                                 <div>
                                     <div class="h-9 w-9 rounded-lg bg-brand-500/10 flex items-center justify-center text-brand-500 mb-4">👥</div>
-                                    <h3 class="font-bold text-slate-200 mb-2">Automated Onboarding</h3>
-                                    <p class="text-xs text-slate-400 leading-relaxed">
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200 mb-2">Automated Onboarding</h3>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                                         Scan and validate IDs, tax documents, and banking credentials. AI processes paperwork and auto-configures platform eligibility rules.
                                     </p>
                                 </div>
-                                <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-brand-500 font-semibold flex items-center gap-1">
+                                <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 text-xs text-brand-600 dark:text-brand-500 font-semibold flex items-center gap-1">
                                     <span>OCR Scan Validation</span>
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                                 </div>
                             </div>
 
                             <!-- Lifecycle Phase 2 -->
-                            <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 flex flex-col justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                                 <div>
                                     <div class="h-9 w-9 rounded-lg bg-accent-500/10 flex items-center justify-center text-accent-500 mb-4">💬</div>
-                                    <h3 class="font-bold text-slate-200 mb-2">Conversational Self-Service</h3>
-                                    <p class="text-xs text-slate-400 leading-relaxed">
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200 mb-2">Conversational Self-Service</h3>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                                         NLP-enabled chat agents handle up to 30% of employee queries immediately. Staff receive rapid, conversational explanations for pay variances and balances.
                                     </p>
                                 </div>
-                                <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-accent-500 font-semibold flex items-center gap-1">
+                                <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 text-xs text-accent-600 dark:text-accent-500 font-semibold flex items-center gap-1">
                                     <span>Voice & Text Chat support</span>
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                                 </div>
                             </div>
 
                             <!-- Lifecycle Phase 3 -->
-                            <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 flex flex-col justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                                 <div>
                                     <div class="h-9 w-9 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-4">📈</div>
-                                    <h3 class="font-bold text-slate-200 mb-2">Workforce Predictive Analytics</h3>
-                                    <p class="text-xs text-slate-400 leading-relaxed">
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200 mb-2">Workforce Predictive Analytics</h3>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                                         Transform payroll inputs into forward-looking budget and compliance intelligence. Anticipate future headcount costs, high-risk attrition zones, and overtime limits.
                                     </p>
                                 </div>
-                                <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-indigo-400 font-semibold flex items-center gap-1">
+                                <div class="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 text-xs text-indigo-600 dark:text-indigo-400 font-semibold flex items-center gap-1">
                                     <span>Predictive modeling</span>
                                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                                 </div>
@@ -419,11 +436,11 @@
                         </div>
 
                         <!-- Mini Interactive Showcase -->
-                        <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 flex items-center justify-between">
+                        <div class="bg-slate-100 dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
                             <span class="text-xs font-mono text-slate-500">Live Dashboard Query Sandbox:</span>
-                            <div class="flex gap-2">
-                                <button onclick="showToast('AI Query Output: $245,300 forecasted spend for Q3.')" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 font-semibold border border-slate-700 transition-all">"Forecast Q3 global cost..."</button>
-                                <button onclick="showToast('AI Query Output: Overtime spikes identified in Logistics Division (15% YoY).')" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 rounded text-xs text-slate-300 font-semibold border border-slate-700 transition-all">"Identify overtime spikes..."</button>
+                            <div class="flex gap-2 w-full sm:w-auto">
+                                <button onclick="showToast('AI Query Output: $245,300 forecasted spend for Q3.')" class="flex-1 sm:flex-initial px-3 py-1 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 rounded text-xs text-slate-700 dark:text-slate-300 font-semibold border border-slate-200 dark:border-slate-700 transition-all">"Forecast Q3 global cost..."</button>
+                                <button onclick="showToast('AI Query Output: Overtime spikes identified in Logistics Division (15% YoY).')" class="flex-1 sm:flex-initial px-3 py-1 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 rounded text-xs text-slate-700 dark:text-slate-300 font-semibold border border-slate-200 dark:border-slate-700 transition-all">"Identify overtime spikes..."</button>
                             </div>
                         </div>
                     </div>
@@ -447,68 +464,68 @@
                     <div class="w-full max-w-5xl px-4">
                         <div class="mb-6">
                             <span class="text-brand-500 font-semibold text-xs tracking-wider uppercase">User Experience</span>
-                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100">Intelligent CorePay Dashboard</h2>
+                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">Intelligent CorePay Dashboard</h2>
                         </div>
 
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                             <!-- Feature Highlight -->
                             <div class="space-y-4 lg:col-span-1">
-                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                                    <h3 class="font-bold text-slate-200 text-sm mb-2">🖥️ Single Portal Control</h3>
-                                    <p class="text-xs text-slate-400">Administrators configure, monitor, approve, and execute cycles from one unified hub.</p>
+                                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">🖥️ Single Portal Control</h3>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400">Administrators configure, monitor, approve, and execute cycles from one unified hub.</p>
+                                end</div>
+                                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">📁 "Upload Once" Flow</h3>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400">Standardized maps allow timesheets and hours to be dragged and ingested in seconds.</p>
                                 </div>
-                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                                    <h3 class="font-bold text-slate-200 text-sm mb-2">📁 "Upload Once" Flow</h3>
-                                    <p class="text-xs text-slate-400">Standardized maps allow timesheets and hours to be dragged and ingested in seconds.</p>
-                                </div>
-                                <div class="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                                    <h3 class="font-bold text-slate-200 text-sm mb-2">📱 Mobile Self-Service</h3>
-                                    <p class="text-xs text-slate-400">Employees view calculations, submit leaves, and trace pay breakdowns securely on-the-go.</p>
+                                <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">📱 Mobile Self-Service</h3>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400">Employees view calculations, submit leaves, and trace pay breakdowns securely on-the-go.</p>
                                 </div>
                             </div>
 
                             <!-- Live Admin Interface Mock -->
-                            <div class="lg:col-span-2 bg-slate-900 p-5 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                            <div class="lg:col-span-2 bg-slate-100 dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                                 <div>
-                                    <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                                    <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3 mb-4">
                                         <div class="flex items-center gap-2">
                                             <span class="h-3.5 w-3.5 rounded-full bg-brand-500"></span>
-                                            <span class="text-xs font-mono font-bold text-slate-400">Current Run Status: Pre-Process Validation</span>
+                                            <span class="text-xs font-mono font-bold text-slate-600 dark:text-slate-400">Current Run Status: Pre-Process Validation</span>
                                         </div>
                                         <span class="text-xs text-slate-500">Cycle: June 2026</span>
                                     </div>
 
                                     <!-- Interactive Task List -->
                                     <div class="space-y-2.5">
-                                        <div class="flex items-center justify-between p-3 rounded-lg bg-slate-950 border border-slate-800">
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                                             <div class="flex items-center gap-2.5">
                                                 <span class="text-brand-500">✓</span>
-                                                <span class="text-xs text-slate-300">45 timesheets uploaded successfully</span>
+                                                <span class="text-xs text-slate-700 dark:text-slate-300">45 timesheets uploaded successfully</span>
                                             </div>
-                                            <span class="text-[10px] font-mono text-slate-500">Completed</span>
+                                            <span class="text-[10px] font-mono text-slate-400 dark:text-slate-500">Completed</span>
                                         </div>
 
-                                        <div class="flex items-center justify-between p-3 rounded-lg bg-slate-950 border border-red-500/30">
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-slate-950 border border-red-200 dark:border-red-500/30 shadow-sm shadow-red-500/5">
                                             <div class="flex items-center gap-2.5">
                                                 <span class="text-red-500 animate-pulse">⚠️</span>
-                                                <span class="text-xs text-slate-200 font-bold">1 Outlier Overtime Flagged: Warehouse Division</span>
+                                                <span class="text-xs text-slate-800 dark:text-slate-200 font-bold">1 Outlier Overtime Flagged: Warehouse Division</span>
                                             </div>
-                                            <button onclick="showToast('Reviewing Flag: Overtime hours (45h) for ID-8822 exceed regional statutory threshold.')" class="px-2 py-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded text-[10px] font-bold tracking-wider transition-all">REVIEW FLAG</button>
+                                            <button onclick="showToast('Reviewing Flag: Overtime hours (45h) for ID-8822 exceed regional statutory threshold.')" class="px-2 py-1 bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 rounded text-[10px] font-bold tracking-wider transition-all">REVIEW FLAG</button>
                                         </div>
 
-                                        <div class="flex items-center justify-between p-3 rounded-lg bg-slate-950 border border-slate-800">
+                                        <div class="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                                             <div class="flex items-center gap-2.5">
-                                                <span class="text-slate-500">•</span>
-                                                <span class="text-xs text-slate-400">Missing Tax ID Check: 0 issues found</span>
+                                                <span class="text-slate-400 dark:text-slate-500">•</span>
+                                                <span class="text-xs text-slate-600 dark:text-slate-400">Missing Tax ID Check: 0 issues found</span>
                                             </div>
-                                            <span class="text-[10px] font-mono text-slate-500">Completed</span>
+                                            <span class="text-[10px] font-mono text-slate-400 dark:text-slate-500">Completed</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="mt-6 pt-4 border-t border-slate-800 flex justify-between items-center">
-                                    <p class="text-[10px] text-slate-400">Admin Action Required: Resolve 1 outlier flag before payout</p>
-                                    <button onclick="showToast('Processing Complete! Direct deposit journals queued.')" class="px-3.5 py-1.5 rounded bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-xs transition-all">APPROVE & EXECUTE RUN</button>
+                                <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                                    <p class="text-[10px] text-slate-500 dark:text-slate-400">Admin Action Required: Resolve 1 outlier flag before payout</p>
+                                    <button onclick="showToast('Processing Complete! Direct deposit journals queued.')" class="w-full sm:w-auto px-3.5 py-1.5 rounded bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-xs transition-all text-center">APPROVE & EXECUTE RUN</button>
                                 </div>
                             </div>
                         </div>
@@ -534,7 +551,7 @@
                     <div class="w-full max-w-5xl px-4">
                         <div class="mb-6">
                             <span class="text-brand-500 font-semibold text-xs tracking-wider uppercase">Tangible Value Delivery</span>
-                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100">Quantified Business Impact</h2>
+                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">Quantified Business Impact</h2>
                         </div>
 
                         <!-- Benefits Grid -->
@@ -542,74 +559,74 @@
                             
                             <!-- Static Metrics -->
                             <div class="grid grid-cols-2 gap-4">
-                                <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 flex flex-col justify-between">
+                                <div class="bg-slate-100 dark:bg-slate-900/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                                     <span class="text-3xl">⏱️</span>
                                     <div>
-                                        <h3 class="text-2xl font-extrabold text-brand-500 tracking-tight">3x Faster</h3>
-                                        <p class="text-xs text-slate-400 mt-1">Average run duration cut from 3 business days down to less than 24 hours.</p>
+                                        <h3 class="text-2xl font-extrabold text-brand-600 dark:text-brand-500 tracking-tight">3x Faster</h3>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Average run duration cut from 3 business days down to less than 24 hours.</p>
                                     </div>
                                 </div>
 
-                                <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 flex flex-col justify-between">
+                                <div class="bg-slate-100 dark:bg-slate-900/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                                     <span class="text-3xl">🎯</span>
                                     <div>
-                                        <h3 class="text-2xl font-extrabold text-indigo-400 tracking-tight">95%+</h3>
-                                        <p class="text-xs text-slate-400 mt-1">Reduction in post-run corrections and manual tax processing errors.</p>
+                                        <h3 class="text-2xl font-extrabold text-indigo-600 dark:text-indigo-400 tracking-tight">95%+</h3>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Reduction in post-run corrections and manual tax processing errors.</p>
                                     </div>
                                 </div>
 
-                                <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 flex flex-col justify-between">
+                                <div class="bg-slate-100 dark:bg-slate-900/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                                     <span class="text-3xl">📊</span>
                                     <div>
-                                        <h3 class="text-2xl font-extrabold text-accent-500 tracking-tight">+20%</h3>
-                                        <p class="text-xs text-slate-400 mt-1">Improvement in financial forecast and headcount budgeting accuracy.</p>
+                                        <h3 class="text-2xl font-extrabold text-accent-600 dark:text-accent-500 tracking-tight">+20%</h3>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Improvement in financial forecast and headcount budgeting accuracy.</p>
                                     </div>
                                 </div>
 
-                                <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800 flex flex-col justify-between">
+                                <div class="bg-slate-100 dark:bg-slate-900/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                                     <span class="text-3xl">🔒</span>
                                     <div>
-                                        <h3 class="text-2xl font-extrabold text-emerald-400 tracking-tight">100%</h3>
-                                        <p class="text-xs text-slate-400 mt-1">Automated compliance tracking across dynamic federal and local tax lines.</p>
+                                        <h3 class="text-2xl font-extrabold text-emerald-600 dark:text-emerald-400 tracking-tight">100%</h3>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Automated compliance tracking across dynamic federal and local tax lines.</p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Custom Visual Chart representation via inline clean CSS elements -->
-                            <div class="bg-slate-900 p-6 rounded-xl border border-slate-800 flex flex-col justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
                                 <div>
-                                    <h3 class="font-bold text-slate-200 text-sm mb-4 flex items-center gap-2">
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-4 flex items-center gap-2">
                                         <span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span> Forecast Accuracy Gains (Real-World Baseline)
                                     </h3>
-                                    <p class="text-xs text-slate-400 mb-6">Comparing manual prediction variances against ML-driven automated forecasts.</p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Comparing manual prediction variances against ML-driven automated forecasts.</p>
 
                                     <!-- Chart Visual Component -->
                                     <div class="space-y-4">
                                         <div>
-                                            <div class="flex justify-between text-[11px] font-mono text-slate-400 mb-1">
+                                            <div class="flex justify-between text-[11px] font-mono text-slate-600 dark:text-slate-400 mb-1">
                                                 <span>Traditional Forecasting (Variance Error)</span>
-                                                <span class="text-red-400 font-bold">22.4% Error Rate</span>
+                                                <span class="text-red-600 dark:text-red-400 font-bold">22.4% Error Rate</span>
                                             </div>
-                                            <div class="w-full bg-slate-950 h-3 rounded-full overflow-hidden border border-slate-800">
+                                            <div class="w-full bg-white dark:bg-slate-950 h-3 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
                                                 <div class="bg-gradient-to-r from-red-500 to-orange-500 h-full rounded-full" style="width: 78%"></div>
                                             </div>
                                         </div>
 
                                         <div>
-                                            <div class="flex justify-between text-[11px] font-mono text-slate-300 mb-1">
+                                            <div class="flex justify-between text-[11px] font-mono text-slate-700 dark:text-slate-300 mb-1">
                                                 <span>CorePay ML Forecasting (Variance Error)</span>
-                                                <span class="text-brand-500 font-bold">2.1% Error Rate</span>
+                                                <span class="text-brand-600 dark:text-brand-500 font-bold">2.1% Error Rate</span>
                                             </div>
-                                            <div class="w-full bg-slate-950 h-3 rounded-full overflow-hidden border border-slate-800">
+                                            <div class="w-full bg-white dark:bg-slate-950 h-3 rounded-full overflow-hidden border border-slate-200 dark:border-slate-800">
                                                 <div class="bg-gradient-to-r from-brand-500 to-accent-500 h-full rounded-full" style="width: 95%"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="mt-6 pt-4 border-t border-slate-800 text-xs text-slate-400 flex justify-between items-center">
+                                <div class="mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400 flex justify-between items-center">
                                     <span>Source: Corporate Operations Analysis (2026)</span>
-                                    <span class="text-[10px] px-2 py-0.5 rounded bg-brand-500/10 text-brand-500 font-mono">Verified ROI</span>
+                                    <span class="text-[10px] px-2 py-0.5 rounded bg-brand-500/10 text-brand-600 dark:text-brand-500 font-mono">Verified ROI</span>
                                 </div>
                             </div>
                         </div>
@@ -634,54 +651,54 @@
                     <div class="w-full max-w-5xl px-4">
                         <div class="mb-4">
                             <span class="text-brand-500 font-semibold text-xs tracking-wider uppercase">Project Management</span>
-                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100">CorePay Phased Rollout Plan</h2>
+                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">CorePay Phased Rollout Plan</h2>
                         </div>
 
                         <!-- Interactive Gantt-Like Table Component -->
-                        <div class="bg-slate-900 rounded-xl border border-slate-800 overflow-hidden mb-4">
-                            <div class="grid grid-cols-12 bg-slate-950 px-4 py-3 border-b border-slate-800 text-[10px] font-mono text-slate-500 font-bold uppercase tracking-wider">
+                        <div class="bg-slate-100 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden mb-4">
+                            <div class="grid grid-cols-12 bg-slate-200 dark:bg-slate-950 px-4 py-3 border-b border-slate-200 dark:border-slate-800 text-[10px] font-mono text-slate-600 dark:text-slate-500 font-bold uppercase tracking-wider">
                                 <div class="col-span-3">Phase</div>
                                 <div class="col-span-5">Key Milestones & Deliverables</div>
                                 <div class="col-span-4 text-right">Target Timeline</div>
                             </div>
 
-                            <div class="divide-y divide-slate-800/60 text-xs">
+                            <div class="divide-y divide-slate-200 dark:divide-slate-800/60 text-xs">
                                 <!-- Phase 1 -->
-                                <div class="grid grid-cols-12 px-4 py-3.5 hover:bg-slate-800/20 transition-all items-center">
-                                    <div class="col-span-3 font-bold text-brand-500">1. Assessment & Planning</div>
-                                    <div class="col-span-5 text-slate-300">Map internal data requirements, clean historical records, compile compliance checklists.</div>
-                                    <div class="col-span-4 text-right text-slate-400 font-mono">Month 1 - 2</div>
+                                <div class="grid grid-cols-12 px-4 py-3.5 hover:bg-slate-200/50 dark:hover:bg-slate-800/20 transition-all items-center">
+                                    <div class="col-span-3 font-bold text-brand-600 dark:text-brand-500">1. Assessment & Planning</div>
+                                    <div class="col-span-5 text-slate-700 dark:text-slate-300">Map internal data requirements, clean historical records, compile compliance checklists.</div>
+                                    <div class="col-span-4 text-right text-slate-500 dark:text-slate-400 font-mono">Month 1 - 2</div>
                                 </div>
                                 <!-- Phase 2 -->
-                                <div class="grid grid-cols-12 px-4 py-3.5 hover:bg-slate-800/20 transition-all items-center">
-                                    <div class="col-span-3 font-bold text-accent-500">2. Configuration & Integration</div>
-                                    <div class="col-span-5 text-slate-300">Connect cloud instance API hooks to HRIS and general ledger; set custom validation parameters.</div>
-                                    <div class="col-span-4 text-right text-slate-400 font-mono">Month 3 - 5</div>
+                                <div class="grid grid-cols-12 px-4 py-3.5 hover:bg-slate-200/50 dark:hover:bg-slate-800/20 transition-all items-center">
+                                    <div class="col-span-3 font-bold text-accent-600 dark:text-accent-500">2. Configuration & Integration</div>
+                                    <div class="col-span-5 text-slate-700 dark:text-slate-300">Connect cloud instance API hooks to HRIS and general ledger; set custom validation parameters.</div>
+                                    <div class="col-span-4 text-right text-slate-500 dark:text-slate-400 font-mono">Month 3 - 5</div>
                                 </div>
                                 <!-- Phase 3 -->
-                                <div class="grid grid-cols-12 px-4 py-3.5 hover:bg-slate-800/20 transition-all items-center">
-                                    <div class="col-span-3 font-bold text-yellow-500">3. Parallel Pilot Tests</div>
-                                    <div class="col-span-5 text-slate-300">Run parallel pay computations; assess calculation gaps and adjust parameters.</div>
-                                    <div class="col-span-4 text-right text-slate-400 font-mono">Month 6 - 7</div>
+                                <div class="grid grid-cols-12 px-4 py-3.5 hover:bg-slate-200/50 dark:hover:bg-slate-800/20 transition-all items-center">
+                                    <div class="col-span-3 font-bold text-yellow-600 dark:text-yellow-500">3. Parallel Pilot Tests</div>
+                                    <div class="col-span-5 text-slate-700 dark:text-slate-300">Run parallel pay computations; assess calculation gaps and adjust parameters.</div>
+                                    <div class="col-span-4 text-right text-slate-500 dark:text-slate-400 font-mono">Month 6 - 7</div>
                                 </div>
                                 <!-- Phase 4 -->
-                                <div class="grid grid-cols-12 px-4 py-3.5 hover:bg-slate-800/20 transition-all items-center">
-                                    <div class="col-span-3 font-bold text-emerald-500">4. Live Execution & Handover</div>
-                                    <div class="col-span-5 text-slate-300">Decommission legacy files, transition user groups, complete interactive team training.</div>
-                                    <div class="col-span-4 text-right text-slate-400 font-mono">Month 8 - 9</div>
+                                <div class="grid grid-cols-12 px-4 py-3.5 hover:bg-slate-200/50 dark:hover:bg-slate-800/20 transition-all items-center">
+                                    <div class="col-span-3 font-bold text-emerald-600 dark:text-emerald-500">4. Live Execution & Handover</div>
+                                    <div class="col-span-5 text-slate-700 dark:text-slate-300">Decommission legacy files, transition user groups, complete interactive team training.</div>
+                                    <div class="col-span-4 text-right text-slate-500 dark:text-slate-400 font-mono">Month 8 - 9</div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Change Management Notes Callout -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800/80">
-                                <h3 class="text-xs font-bold text-slate-200 mb-2 uppercase tracking-wide">⚠️ Key Risks Identified</h3>
-                                <p class="text-[11px] text-slate-400">Poor quality records in legacy spreadsheets or databases. Mitigation: Mandatory pre-implementation data hygiene sweep.</p>
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-lg border border-slate-200 dark:border-slate-800/80">
+                                <h3 class="text-xs font-bold text-slate-700 dark:text-slate-200 mb-2 uppercase tracking-wide">⚠️ Key Risks Identified</h3>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Poor quality records in legacy spreadsheets or databases. Mitigation: Mandatory pre-implementation data hygiene sweep.</p>
                             </div>
-                            <div class="bg-slate-900/60 p-4 rounded-lg border border-slate-800/80">
-                                <h3 class="text-xs font-bold text-slate-200 mb-2 uppercase tracking-wide">🔄 Change Management Strategy</h3>
-                                <p class="text-[11px] text-slate-400">Appoint internal champions early, build clear training modules, and utilize parallel runs for confidence.</p>
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-4 rounded-lg border border-slate-200 dark:border-slate-800/80">
+                                <h3 class="text-xs font-bold text-slate-700 dark:text-slate-200 mb-2 uppercase tracking-wide">🔄 Change Management Strategy</h3>
+                                <p class="text-[11px] text-slate-500 dark:text-slate-400">Appoint internal champions early, build clear training modules, and utilize parallel runs for confidence.</p>
                             </div>
                         </div>
                     </div>
@@ -708,50 +725,50 @@
                     <div class="w-full max-w-5xl px-4">
                         <div class="mb-6">
                             <span class="text-brand-500 font-semibold text-xs tracking-wider uppercase">Enterprise Trust</span>
-                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100">Data Governance & Security</h2>
+                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">Data Governance & Security</h2>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <!-- Security Column 1 -->
-                            <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800/80 flex flex-col justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800/80 flex flex-col justify-between">
                                 <div>
                                     <div class="text-2xl mb-3">🛡️</div>
-                                    <h3 class="font-bold text-slate-200 text-sm mb-2">GDPR & Data Protection</h3>
-                                    <p class="text-xs text-slate-400 leading-relaxed">
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">GDPR & Data Protection</h3>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                                         Data is pseudonymized for validation modeling and training. Complies fully with strict data residency mandates and security directives.
                                     </p>
                                 </div>
-                                <span class="text-[10px] text-slate-500 font-mono mt-4">Compliance By Design</span>
+                                <span class="text-[10px] text-slate-400 dark:text-slate-500 font-mono mt-4">Compliance By Design</span>
                             </div>
 
                             <!-- Security Column 2 -->
-                            <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800/80 flex flex-col justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800/80 flex flex-col justify-between">
                                 <div>
                                     <div class="text-2xl mb-3">🔑</div>
-                                    <h3 class="font-bold text-slate-200 text-sm mb-2">Encryption & Access</h3>
-                                    <p class="text-xs text-slate-400 leading-relaxed">
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">Encryption & Access</h3>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                                         Role-based configurations enforce precise access limits. Files are encrypted during active transit and static resting storage.
                                     </p>
                                 </div>
-                                <span class="text-[10px] text-slate-500 font-mono mt-4">Zero-Trust Infrastructure</span>
+                                <span class="text-[10px] text-slate-400 dark:text-slate-500 font-mono mt-4">Zero-Trust Infrastructure</span>
                             </div>
 
                             <!-- Security Column 3 -->
-                            <div class="bg-slate-900/60 p-6 rounded-xl border border-slate-800/80 flex flex-col justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-900/60 p-6 rounded-xl border border-slate-200 dark:border-slate-800/80 flex flex-col justify-between">
                                 <div>
                                     <div class="text-2xl mb-3">⚖️</div>
-                                    <h3 class="font-bold text-slate-200 text-sm mb-2">Immutable Logs</h3>
-                                    <p class="text-xs text-slate-400 leading-relaxed">
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-2">Immutable Logs</h3>
+                                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                                         Every calculation edit, manager sign-off, or master data change is permanently logged into secure auditable system records.
                                     </p>
                                 </div>
-                                <span class="text-[10px] text-slate-500 font-mono mt-4">100% Traceable Auditing</span>
+                                <span class="text-[10px] text-slate-400 dark:text-slate-500 font-mono mt-4">100% Traceable Auditing</span>
                             </div>
                         </div>
 
-                        <div class="mt-6 p-4 bg-slate-900 rounded-xl border border-slate-800 text-center">
-                            <p class="text-xs text-slate-400">
-                                ⚙️ <strong class="text-slate-200">Continuous Legal Sync:</strong> Platform tax tables automatically pull regulatory and policy shifts across jurisdictions globally.
+                        <div class="mt-6 p-4 bg-slate-100 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-center">
+                            <p class="text-xs text-slate-600 dark:text-slate-400">
+                                ⚙️ <strong class="text-slate-800 dark:text-slate-200 font-bold">Continuous Legal Sync:</strong> Platform tax tables automatically pull regulatory and policy shifts across jurisdictions globally.
                             </p>
                         </div>
                     </div>
@@ -775,63 +792,63 @@
                     <div class="w-full max-w-5xl px-4">
                         <div class="mb-4">
                             <span class="text-brand-500 font-semibold text-xs tracking-wider uppercase">Interactive Case Model</span>
-                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100">Quantifiable Financial Returns</h2>
+                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">Quantifiable Financial Returns</h2>
                         </div>
 
                         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
                             <!-- Input Panel -->
-                            <div class="lg:col-span-5 bg-slate-900 p-5 rounded-xl border border-slate-800 space-y-4">
-                                <h3 class="text-sm font-bold text-slate-200 uppercase tracking-wider mb-2 border-b border-slate-800 pb-2">Adjust Model Inputs</h3>
+                            <div class="lg:col-span-5 bg-slate-100 dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
+                                <h3 class="text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider mb-2 border-b border-slate-200 dark:border-slate-800 pb-2">Adjust Model Inputs</h3>
                                 
                                 <div>
-                                    <label class="block text-xs text-slate-400 mb-1">Company Size (Employee Count)</label>
-                                    <input type="range" id="paramEmployees" min="100" max="5000" step="100" value="1000" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-950">
-                                    <span id="valEmployees" class="text-xs font-mono font-bold text-brand-500 float-right">1,000 Employees</span>
+                                    <label class="block text-xs text-slate-500 dark:text-slate-400 mb-1">Company Size (Employee Count)</label>
+                                    <input type="range" id="paramEmployees" min="100" max="5000" step="100" value="1000" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-200 dark:bg-slate-950 rounded-lg appearance-none h-2">
+                                    <span id="valEmployees" class="text-xs font-mono font-bold text-brand-600 dark:text-brand-500 float-right mt-1">1,000 Employees</span>
                                 </div>
 
                                 <div class="pt-2">
-                                    <label class="block text-xs text-slate-400 mb-1">Manual Processing Time (FTE Days / Cycle)</label>
-                                    <input type="range" id="paramTime" min="2" max="25" step="1" value="10" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-950">
-                                    <span id="valTime" class="text-xs font-mono font-bold text-brand-500 float-right">10 Days / Cycle</span>
+                                    <label class="block text-xs text-slate-500 dark:text-slate-400 mb-1">Manual Processing Time (FTE Days / Cycle)</label>
+                                    <input type="range" id="paramTime" min="2" max="25" step="1" value="10" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-200 dark:bg-slate-950 rounded-lg appearance-none h-2">
+                                    <span id="valTime" class="text-xs font-mono font-bold text-brand-600 dark:text-brand-500 float-right mt-1">10 Days / Cycle</span>
                                 </div>
 
                                 <div class="pt-2">
-                                    <label class="block text-xs text-slate-400 mb-1">Assumed Loaded Hourly Cost ($)</label>
-                                    <input type="range" id="paramCost" min="15" max="80" step="5" value="40" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-950">
-                                    <span id="valCost" class="text-xs font-mono font-bold text-brand-500 float-right">$40 / Hour</span>
+                                    <label class="block text-xs text-slate-500 dark:text-slate-400 mb-1">Assumed Loaded Hourly Cost ($)</label>
+                                    <input type="range" id="paramCost" min="15" max="80" step="5" value="40" oninput="calculateROI()" class="w-full accent-brand-500 bg-slate-200 dark:bg-slate-950 rounded-lg appearance-none h-2">
+                                    <span id="valCost" class="text-xs font-mono font-bold text-brand-600 dark:text-brand-500 float-right mt-1">$40 / Hour</span>
                                 </div>
                             </div>
 
                             <!-- Output Panel -->
-                            <div class="lg:col-span-7 bg-slate-900 p-5 rounded-xl border border-brand-500/20 flex flex-col justify-between">
+                            <div class="lg:col-span-7 bg-slate-100 dark:bg-slate-900 p-5 rounded-xl border border-brand-500/30 dark:border-brand-500/20 flex flex-col justify-between">
                                 <div>
-                                    <h3 class="text-sm font-bold text-slate-100 uppercase tracking-wider mb-4 border-b border-slate-800 pb-2">Projected Annual Savings</h3>
+                                    <h3 class="text-sm font-bold text-slate-850 dark:text-slate-100 uppercase tracking-wider mb-4 border-b border-slate-200 dark:border-slate-800 pb-2">Projected Annual Savings</h3>
                                     
                                     <div class="grid grid-cols-2 gap-4">
-                                        <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 text-center">
-                                            <span class="text-2xl font-black text-brand-500 font-mono block" id="resultAdminSavings">$48,000</span>
-                                            <span class="text-[10px] text-slate-400 uppercase tracking-widest">Admin FTE Savings</span>
+                                        <div class="bg-white dark:bg-slate-950 p-4 rounded-lg border border-slate-200 dark:border-slate-800 text-center">
+                                            <span class="text-2xl font-black text-brand-600 dark:text-brand-500 font-mono block" id="resultAdminSavings">$48,000</span>
+                                            <span class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest">Admin FTE Savings</span>
                                         </div>
 
-                                        <div class="bg-slate-950 p-4 rounded-lg border border-slate-800 text-center">
-                                            <span class="text-2xl font-black text-indigo-400 font-mono block" id="resultErrorSavings">$6,000</span>
-                                            <span class="text-[10px] text-slate-400 uppercase tracking-widest">Avoided Error Cost</span>
+                                        <div class="bg-white dark:bg-slate-950 p-4 rounded-lg border border-slate-200 dark:border-slate-800 text-center">
+                                            <span class="text-2xl font-black text-indigo-600 dark:text-indigo-400 font-mono block" id="resultErrorSavings">$6,000</span>
+                                            <span class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-widest">Avoided Error Cost</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="my-6 p-4 bg-brand-500/5 rounded-lg border border-brand-500/10 flex justify-between items-center">
                                     <div>
-                                        <p class="text-xs text-slate-400">Total Combined Value Projection:</p>
-                                        <p class="text-3xl font-extrabold text-brand-500 font-mono tracking-tight" id="resultTotalSavings">$54,000 / Year</p>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400">Total Combined Value Projection:</p>
+                                        <p class="text-3xl font-extrabold text-brand-600 dark:text-brand-500 font-mono tracking-tight" id="resultTotalSavings">$54,000 / Year</p>
                                     </div>
                                     <div class="text-right">
-                                        <p class="text-xs text-slate-400">First-Year Net ROI</p>
-                                        <span class="text-xs font-mono font-bold text-slate-100 px-2 py-1 rounded bg-slate-800" id="resultPercentROI">112%</span>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400">First-Year Net ROI</p>
+                                        <span class="text-xs font-mono font-bold text-slate-800 dark:text-slate-100 px-2 py-1 rounded bg-slate-200 dark:bg-slate-800" id="resultPercentROI">112%</span>
                                     </div>
                                 </div>
 
-                                <div class="text-[10px] text-slate-500">
+                                <div class="text-[10px] text-slate-550 dark:text-slate-500">
                                     *Model assumes 12 payroll runs per year. Avoided error baseline calculated using an industry-standard penalty probability parameter.
                                 </div>
                             </div>
@@ -859,91 +876,91 @@
                     <div class="w-full max-w-5xl px-4">
                         <div class="mb-4">
                             <span class="text-brand-500 font-semibold text-xs tracking-wider uppercase">System Interface Walkthrough</span>
-                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-100">Interactive Interface Previews</h2>
+                            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-800 dark:text-slate-100">Interactive Interface Previews</h2>
                         </div>
 
                         <!-- 2 Column Mock Window Showcase -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             
                             <!-- Portal Screen 1: Mobile Employee App -->
-                            <div class="bg-slate-900 rounded-2xl border border-slate-800 p-4 flex flex-col justify-between">
-                                <div class="border-b border-slate-800 pb-2 mb-3 flex items-center justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 flex flex-col justify-between">
+                                <div class="border-b border-slate-200 dark:border-slate-800 pb-2 mb-3 flex items-center justify-between">
                                     <div class="flex items-center gap-2">
                                         <span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span>
-                                        <span class="text-[10px] font-mono uppercase text-slate-400 font-bold">Employee Mobile Chat Portal</span>
+                                        <span class="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold">Employee Mobile Chat Portal</span>
                                     </div>
                                     <span class="text-[10px] text-slate-500">Self-Service</span>
                                 </div>
 
                                 <!-- Mini Chat Mockup -->
-                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-3 flex-grow my-2">
+                                <div class="bg-white dark:bg-slate-950 p-3 rounded-lg border border-slate-200 dark:border-slate-800 space-y-3 flex-grow my-2">
                                     <div class="flex flex-col gap-1 items-start max-w-[85%]">
                                         <span class="text-[9px] text-slate-500 ml-1">CorePay AI Agent</span>
-                                        <div class="bg-slate-900 p-2.5 rounded-lg text-[11px] text-slate-300">
+                                        <div class="bg-slate-100 dark:bg-slate-900 p-2.5 rounded-lg text-[11px] text-slate-700 dark:text-slate-300">
                                             Hello Sarah. How can I help with your payslip today?
                                         </div>
                                     </div>
                                     <div class="flex flex-col gap-1 items-end max-w-[85%] ml-auto">
                                         <span class="text-[9px] text-slate-500 mr-1 font-bold">Sarah Doe (Employee)</span>
-                                        <div class="bg-brand-500 p-2.5 rounded-lg text-[11px] text-slate-950 font-medium">
+                                        <div class="bg-brand-500 p-2.5 rounded-lg text-[11px] text-slate-950 font-medium text-right">
                                             Why is my take-home pay higher this month?
                                         </div>
                                     </div>
                                     <div class="flex flex-col gap-1 items-start max-w-[85%]">
                                         <span class="text-[9px] text-slate-500 ml-1">CorePay AI Agent</span>
-                                        <div class="bg-slate-900 p-2.5 rounded-lg text-[11px] text-slate-300">
+                                        <div class="bg-slate-100 dark:bg-slate-900 p-2.5 rounded-lg text-[11px] text-slate-700 dark:text-slate-300">
                                             Your net payout is higher due to a performance bonus of $500, which has been processed under code BONUS_Q2.
                                         </div>
                                     </div>
                                 </div>
 
-                                <button onclick="showToast('Employee Chatbot Live Demo: Conversational payslip queries handled in milliseconds!')" class="w-full mt-2 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded border border-slate-700 text-xs font-bold transition-all">
+                                <button onclick="showToast('Employee Chatbot Live Demo: Conversational payslip queries handled in milliseconds!')" class="w-full mt-2 py-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold transition-all">
                                     LAUNCH CHAT COMPONENT DEMO
                                 </button>
                             </div>
 
                             <!-- Portal Screen 2: Admin Reports Dashboard -->
-                            <div class="bg-slate-900 rounded-2xl border border-slate-800 p-4 flex flex-col justify-between">
-                                <div class="border-b border-slate-800 pb-2 mb-3 flex items-center justify-between">
+                            <div class="bg-slate-100 dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 flex flex-col justify-between">
+                                <div class="border-b border-slate-200 dark:border-slate-800 pb-2 mb-3 flex items-center justify-between">
                                     <div class="flex items-center gap-2">
                                         <span class="w-2.5 h-2.5 rounded-full bg-accent-500"></span>
-                                        <span class="text-[10px] font-mono uppercase text-slate-400 font-bold">Client Admin Dashboard View</span>
+                                        <span class="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold">Client Admin Dashboard View</span>
                                     </div>
                                     <span class="text-[10px] text-slate-500">Insights</span>
                                 </div>
 
-                                <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-3 flex-grow my-2">
+                                <div class="bg-white dark:bg-slate-950 p-3 rounded-lg border border-slate-200 dark:border-slate-800 space-y-3 flex-grow my-2">
                                     <p class="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Calculated Headcount Dynamics</p>
                                     
                                     <!-- Bar Chart representation using Tailwind -->
                                     <div class="space-y-2 mt-2">
                                         <div class="flex items-center gap-2">
-                                            <span class="w-14 text-[9px] text-slate-400 font-mono">Q1 Spend</span>
-                                            <div class="flex-grow bg-slate-900 h-2 rounded-full overflow-hidden">
+                                            <span class="w-14 text-[9px] text-slate-500 dark:text-slate-400 font-mono">Q1 Spend</span>
+                                            <div class="flex-grow bg-slate-100 dark:bg-slate-900 h-2 rounded-full overflow-hidden">
                                                 <div class="bg-indigo-500 h-full" style="width: 65%"></div>
                                             </div>
-                                            <span class="text-[9px] text-slate-300 font-mono">$1.2M</span>
+                                            <span class="text-[9px] text-slate-600 dark:text-slate-300 font-mono">$1.2M</span>
                                         </div>
 
                                         <div class="flex items-center gap-2">
-                                            <span class="w-14 text-[9px] text-slate-400 font-mono">Q2 Spend</span>
-                                            <div class="flex-grow bg-slate-900 h-2 rounded-full overflow-hidden">
+                                            <span class="w-14 text-[9px] text-slate-500 dark:text-slate-400 font-mono">Q2 Spend</span>
+                                            <div class="flex-grow bg-slate-100 dark:bg-slate-900 h-2 rounded-full overflow-hidden">
                                                 <div class="bg-indigo-500 h-full" style="width: 78%"></div>
                                             </div>
-                                            <span class="text-[9px] text-slate-300 font-mono">$1.4M</span>
+                                            <span class="text-[9px] text-slate-600 dark:text-slate-300 font-mono">$1.4M</span>
                                         </div>
 
                                         <div class="flex items-center gap-2">
-                                            <span class="w-14 text-[9px] text-slate-400 font-mono">Q3 Forecast</span>
-                                            <div class="flex-grow bg-slate-900 h-2 rounded-full overflow-hidden">
+                                            <span class="w-14 text-[9px] text-slate-500 dark:text-slate-400 font-mono">Q3 Forecast</span>
+                                            <div class="flex-grow bg-slate-100 dark:bg-slate-900 h-2 rounded-full overflow-hidden">
                                                 <div class="bg-brand-500 h-full" style="width: 85%"></div>
                                             </div>
-                                            <span class="text-[9px] text-brand-500 font-mono font-bold">$1.6M</span>
+                                            <span class="text-[9px] text-brand-600 dark:text-brand-500 font-mono font-bold">$1.6M</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <button onclick="showToast('Query Executed: Executive payroll dashboard rendering complete.')" class="w-full mt-2 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded border border-slate-700 text-xs font-bold transition-all">
+                                <button onclick="showToast('Query Executed: Executive payroll dashboard rendering complete.')" class="w-full mt-2 py-2 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold transition-all">
                                     RENDER REAL-TIME DATASET
                                 </button>
                             </div>
@@ -987,7 +1004,7 @@
                 btn.className = `px-3 py-2 text-left rounded-lg transition-all text-xs font-bold whitespace-nowrap outline-none flex items-center gap-2 ${
                     index === currentSlideIndex 
                         ? 'bg-brand-500 text-slate-950 font-extrabold shadow-md shadow-brand-500/10' 
-                        : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800'
+                        : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800'
                 }`;
                 btn.onclick = () => goToSlide(index);
                 btn.innerHTML = `
@@ -1005,7 +1022,7 @@
 
             // Render view containing proper transition classes
             viewport.innerHTML = `
-                <div class="slide-transition opacity-0 transform scale-95 w-full h-full flex items-center justify-center" id="slideElement">
+                <div class="slide-transition opacity-0 transform scale-95 w-full h-full flex items-center justify-center animate-fade-in" id="slideElement">
                     ${slide.html}
                 </div>
             `;
@@ -1033,7 +1050,7 @@
                 if (index === currentSlideIndex) {
                     btn.className = 'px-3 py-2 text-left rounded-lg transition-all text-xs font-extrabold whitespace-nowrap outline-none flex items-center gap-2 bg-brand-500 text-slate-950 shadow-md shadow-brand-500/10';
                 } else {
-                    btn.className = 'px-3 py-2 text-left rounded-lg transition-all text-xs font-bold whitespace-nowrap outline-none flex items-center gap-2 text-slate-400 hover:text-slate-100 hover:bg-slate-800';
+                    btn.className = 'px-3 py-2 text-left rounded-lg transition-all text-xs font-bold whitespace-nowrap outline-none flex items-center gap-2 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-100 hover:bg-slate-200 dark:hover:bg-slate-800';
                 }
             });
 
@@ -1051,6 +1068,7 @@
             }
         }
 
+        // Backtrack Navigation Controllers
         function prevSlide() {
             if (currentSlideIndex > 0) {
                 currentSlideIndex--;
@@ -1058,9 +1076,24 @@
             }
         }
 
+        // Jump to target slide
         function goToSlide(index) {
             currentSlideIndex = index;
             renderCurrentSlide();
+        }
+
+        // Theme Toggle Controller
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                showToast('Light Mode Enabled');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                showToast('Dark Mode Enabled');
+            }
         }
 
         // Keyboard Shortcut Mapping
@@ -1165,16 +1198,16 @@
                 const page = document.createElement('div');
                 page.className = 'print-page hidden flex flex-col justify-between';
                 page.innerHTML = `
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-6">
-                        <span class="text-xs font-mono font-bold text-slate-500">COREPAY PRESENTATION • SLIDE ${idx + 1}</span>
-                        <span class="text-xs font-bold text-brand-500">CorePay AI Ecosystem</span>
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-6">
+                        <span class="text-xs font-mono font-bold text-slate-400">COREPAY PRESENTATION • SLIDE ${idx + 1}</span>
+                        <span class="text-xs font-bold text-brand-600">CorePay AI Ecosystem</span>
                     </div>
                     <div class="flex-grow flex items-center justify-center my-8">
                         ${slide.html}
                     </div>
-                    <div class="border-t border-slate-800 pt-4 mt-6">
-                        <h4 class="text-xs font-bold text-slate-400 mb-2 uppercase tracking-wider">Speaker Reference Notes:</h4>
-                        <div class="text-slate-300 text-xs leading-relaxed space-y-1">
+                    <div class="border-t border-slate-200 pt-4 mt-6">
+                        <h4 class="text-xs font-bold text-slate-500 mb-2 uppercase tracking-wider">Speaker Reference Notes:</h4>
+                        <div class="text-slate-700 text-xs leading-relaxed space-y-1">
                             ${slide.notes}
                         </div>
                     </div>
@@ -1185,6 +1218,14 @@
 
         // Initialize App on Window Load
         window.onload = function() {
+            // Apply localStorage theme config
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+
             initNavigationMenu();
             renderCurrentSlide();
             buildPrintSlides();
